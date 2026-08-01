@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="uk" data-theme="corporate">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Watcher{% endblock %}</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='/css/app.css') }}"
+    >
+
+    <script src="https://unpkg.com/htmx.org@2.0.8" defer></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script src="{{ url_for('static', path='/js/app.js') }}" defer></script>
+  </head>
+
+  <body class="min-h-screen bg-base-200 text-base-content">
+    <div class="drawer lg:drawer-open">
+      <input id="app-drawer" type="checkbox" class="drawer-toggle">
+
+      <div class="drawer-content">
+        <header class="navbar sticky top-0 z-10 border-b border-base-300 bg-base-100/90 px-4 backdrop-blur">
+          <div class="flex-none lg:hidden">
+            <label for="app-drawer" class="btn btn-square btn-ghost">
+              <i data-lucide="menu"></i>
+            </label>
+          </div>
+
+          <div class="flex-1">
+            <h1 class="text-lg font-semibold">
+              {% block page_title %}Dashboard{% endblock %}
+            </h1>
+          </div>
+
+          <div class="flex-none">
+            <button
+              id="theme-toggle"
+              class="btn btn-square btn-ghost"
+              aria-label="Switch theme"
+            >
+              <i data-lucide="moon"></i>
+            </button>
+          </div>
+        </header>
+
+        <main class="mx-auto max-w-7xl p-4 md:p-6">
+          {% block content %}{% endblock %}
+        </main>
+      </div>
+
+      <aside class="drawer-side z-20">
+        <label for="app-drawer" class="drawer-overlay"></label>
+
+        <div class="min-h-full w-64 border-r border-base-300 bg-base-100 p-4">
+          <a href="/" class="mb-8 flex items-center gap-2 px-2 text-xl font-bold">
+            <span class="grid h-9 w-9 place-items-center rounded-xl bg-primary text-primary-content">
+              <i data-lucide="radar"></i>
+            </span>
+            Watcher
+          </a>
+
+          <ul class="menu gap-1">
+            <li>
+              <a href="/" class="active">
+                <i data-lucide="layout-dashboard"></i>
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a href="/monitors">
+                <i data-lucide="radar"></i>
+                Monitors
+              </a>
+            </li>
+            <li>
+              <a href="/changes">
+                <i data-lucide="git-compare"></i>
+                Changes
+              </a>
+            </li>
+            <li>
+              <a href="/errors">
+                <i data-lucide="triangle-alert"></i>
+                Errors
+              </a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </body>
+</html>
