@@ -1,0 +1,19 @@
+from datetime import UTC, datetime
+
+from base import Base
+from sqlalchemy import DateTime, ForeignKey, Integer, String, Text
+from sqlalchemy.orm import Mapped, mapped_column
+
+
+class Snapshot(Base):
+    __tablename__ = "snapshots"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    tracked_page_id: Mapped[int] = mapped_column(
+        ForeignKey("tracked_pages.id"), nullable=False, index=True
+    )
+    content_hash: Mapped[str] = mapped_column(String, nullable=False)
+    content_text: Mapped[Text] = mapped_column(String, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(UTC), nullable=False
+    )
