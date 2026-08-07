@@ -1,6 +1,7 @@
 from typing import Annotated
 
 from core.database import get_db_session
+from exceptions.user import InvalidCredentialsError, UserAlreadyExistsError
 from fastapi import APIRouter, Depends, HTTPException, status
 from repositories.user import UserRepository
 from schemas.user import UserCreate, UserLogin, UserRead
@@ -20,8 +21,8 @@ async def register(
 ) -> UserRead:
     service = create_user_service(session)
     try:
-        return await service.register_user(user_in)
-    except ValueError as e:
+        return await service.register(user_in)
+    except UserAlreadyExistsError as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e)) from e
 
 
@@ -31,6 +32,6 @@ async def login(
 ) -> UserRead:
     service = create_user_service(session)
     try:
-        return await service.authenticate_user(user_in)
-    except ValueError as e:
+        return await service.authenticate(user_in)
+    except InvalidCredentialsError as e:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=str(e)) from e

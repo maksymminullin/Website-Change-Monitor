@@ -4,8 +4,6 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
 from app.core.config import get_setting
-from app.modules.dashboard.router import router as dashboard_router
-from app.modules.monitoring.router import router as monitoring_router
 
 
 @asynccontextmanager
@@ -22,6 +20,3 @@ app = FastAPI(
 )
 
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
-
-app.include_router(dashboard_router)
-app.include_router(monitoring_router)
