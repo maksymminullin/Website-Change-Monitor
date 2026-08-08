@@ -1,4 +1,4 @@
-from exceptions.traked_page import (
+from exceptions.tracked_page import (
     EmptyTrackedPageUpdateError,
     TrackedPageNotFoundError,
 )

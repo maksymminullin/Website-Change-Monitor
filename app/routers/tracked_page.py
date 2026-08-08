@@ -1,7 +1,7 @@
 from typing import Annotated
 
 from core.database import get_db_session
-from exceptions.traked_page import (
+from exceptions.tracked_page import (
     EmptyTrackedPageUpdateError,
     TrackedPageAlreadyExistsError,
     TrackedPageNotFoundError,

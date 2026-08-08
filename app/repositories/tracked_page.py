@@ -1,4 +1,4 @@
-from exceptions.traked_page import TrackedPageAlreadyExistsError
+from exceptions.tracked_page import TrackedPageAlreadyExistsError
 from models.tracked_page import TrackedPage
 from schemas.tracked_page import TrackedPageCreate, TrackedPageUpdate
 from sqlalchemy import select
