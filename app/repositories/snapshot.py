@@ -11,11 +11,9 @@ class SnapshotRepository:
     async def get_by_id(self, snapshot_id: int, tracked_page_id: int) -> Snapshot | None:
         snapshot = await self.session.execute(
             select(Snapshot).where(
-                Snapshot.id == snapshot_id,
-                Snapshot.tracked_page_id == tracked_page_id,
+                Snapshot.id == snapshot_id, Snapshot.tracked_page_id == tracked_page_id
             )
         )
-
         return snapshot.scalar_one_or_none()
 
     async def get_all_by_tracked_page_id(self, tracked_page_id: int) -> list[Snapshot]:
